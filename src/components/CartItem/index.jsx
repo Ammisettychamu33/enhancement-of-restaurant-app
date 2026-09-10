@@ -1,4 +1,3 @@
-import { FaTrashAlt } from 'react-icons/fa'
 import CartContext from '../../context/CartContext'
 import './index.css'
 
@@ -26,7 +25,7 @@ const CartItem = ({ cartItemDetails }) => {
           removeCartItem(dishId)
         }
 
-        const totalPrice = (dishPrice * quantity).toFixed(2)
+        const totalPrice = dishPrice * quantity
 
         return (
           <li className="cart-item">

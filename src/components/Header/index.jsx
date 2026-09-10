@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react'
 import Cookies from 'js-cookie'
 import { FaShoppingCart } from 'react-icons/fa'
 import CartContext from '../../context/CartContext'
@@ -37,7 +37,6 @@ const Header = ({ restaurantName = 'UNI Resto Cafe' }) => {
                   <FaShoppingCart className="cart-icon" />
                   <span className="cart-badge">{cartItemsCount}</span>
                 </button>
-                <p className="cart-count-text">{cartItemsCount}</p>
                 <button
                   type="button"
                   className="logout-desktop-btn"
