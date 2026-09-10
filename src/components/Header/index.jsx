@@ -37,6 +37,7 @@ const Header = ({ restaurantName = 'UNI Resto Cafe' }) => {
                   <FaShoppingCart className="cart-icon" />
                   <span className="cart-badge">{cartItemsCount}</span>
                 </button>
+                <p className="cart-count-text">{cartItemsCount}</p>
                 <button
                   type="button"
                   className="logout-desktop-btn"

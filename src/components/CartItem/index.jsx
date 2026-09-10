@@ -33,7 +33,7 @@ const CartItem = ({ cartItemDetails }) => {
             <img src={dishImage} alt={dishName} className="cart-product-image" />
 
             <div className="cart-item-details-container">
-              <h4 className="cart-product-title">{dishName}</h4>
+              <p className="cart-product-title">{dishName}</p>
 
               <div className="cart-quantity-container">
                 <button
@@ -43,7 +43,7 @@ const CartItem = ({ cartItemDetails }) => {
                 >
                   -
                 </button>
-                <span className="cart-quantity-text">{quantity}</span>
+                <p className="cart-quantity-text">{quantity}</p>
                 <button
                   type="button"
                   className="cart-quantity-btn"
@@ -64,7 +64,7 @@ const CartItem = ({ cartItemDetails }) => {
                 onClick={onClickRemove}
                 aria-label="Remove item"
               >
-                <FaTrashAlt className="remove-icon" />
+                Remove
               </button>
             </div>
           </li>

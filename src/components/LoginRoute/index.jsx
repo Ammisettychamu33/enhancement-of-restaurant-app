@@ -8,7 +8,6 @@ const LoginRoute = () => {
   const [password, setPassword] = useState('')
   const [showSubmitError, setShowSubmitError] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -29,8 +28,6 @@ const LoginRoute = () => {
 
   const submitForm = async event => {
     event.preventDefault()
-    setIsLoading(true)
-    setShowSubmitError(false)
 
     const userDetails = { username, password }
     const url = 'https://apis.ccbp.in/login'
@@ -42,15 +39,13 @@ const LoginRoute = () => {
     try {
       const response = await fetch(url, options)
       const data = await response.json()
-      setIsLoading(false)
       if (response.ok === true) {
         onSubmitSuccess(data.jwt_token)
       } else {
         onSubmitFailure(data.error_msg)
       }
     } catch (err) {
-      setIsLoading(false)
-      onSubmitFailure('Something went wrong. Please try again later.')
+      onSubmitFailure('Something went wrong')
     }
   }
 
@@ -63,7 +58,7 @@ const LoginRoute = () => {
             alt="website logo"
             className="login-website-logo"
           />
-          <h2 className="login-title">UNI Resto Cafe</h2>
+          <h1 className="login-title">UNI Resto Cafe</h1>
         </div>
         <form className="form-container" onSubmit={submitForm}>
           <div className="input-container">
@@ -77,7 +72,6 @@ const LoginRoute = () => {
               value={username}
               onChange={e => setUsername(e.target.value)}
               placeholder="Username"
-              required
             />
           </div>
           <div className="input-container">
@@ -91,17 +85,13 @@ const LoginRoute = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="Password"
-              required
             />
           </div>
-          <button type="submit" className="login-button" disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
+          <button type="submit" className="login-button">
+            Login
           </button>
-          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+          {showSubmitError && <p className="error-message">{errorMsg}</p>}
         </form>
-        <p className="demo-credentials-note">
-          Demo: <span>rahul</span> / <span>rahul@2021</span>
-        </p>
       </div>
     </div>
   )

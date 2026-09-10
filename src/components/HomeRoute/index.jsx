@@ -20,7 +20,7 @@ const HomeRoute = () => {
       const dataObj = Array.isArray(data) ? data[0] : data
 
       setResponseObj(dataObj)
-      if (dataObj.table_menu_list && dataObj.table_menu_list.length > 0) {
+      if (dataObj && dataObj.table_menu_list && dataObj.table_menu_list.length > 0) {
         setActiveCategoryId(dataObj.table_menu_list[0].menu_category_id)
       }
       setIsLoading(false)
@@ -41,10 +41,11 @@ const HomeRoute = () => {
   )
 
   const renderMenuView = () => {
-    const { restaurant_name: restaurantName, table_menu_list: tableMenuList } = responseObj
+    const restaurantName = responseObj ? responseObj.restaurant_name : 'UNI Resto Cafe'
+    const tableMenuList = responseObj ? responseObj.table_menu_list : []
 
     const activeCategory = tableMenuList.find(
-      category => category.menu_category_id === activeCategoryId
+      category => String(category.menu_category_id) === String(activeCategoryId)
     )
     const activeCategoryDishes = activeCategory ? activeCategory.category_dishes : []
 
@@ -58,7 +59,9 @@ const HomeRoute = () => {
               <button
                 type="button"
                 className={`tab-btn ${
-                  eachCategory.menu_category_id === activeCategoryId ? 'active-tab-btn' : ''
+                  String(eachCategory.menu_category_id) === String(activeCategoryId)
+                    ? 'active-tab-btn'
+                    : ''
                 }`}
                 onClick={() => onChangeCategory(eachCategory.menu_category_id)}
               >

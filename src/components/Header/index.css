@@ -35,7 +35,7 @@
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .my-orders-text {
@@ -80,6 +80,16 @@
   box-shadow: 0 0 0 2px #ffffff;
 }
 
+.cart-count-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-color);
+  background-color: #ffb703;
+  color: #000000;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
 .logout-desktop-btn {
   background-color: transparent;
   border: 1.5px solid var(--primary-color);
@@ -101,9 +111,6 @@
   }
   .restaurant-name {
     font-size: 1.2rem;
-  }
-  .my-orders-text {
-    display: none;
   }
   .logout-desktop-btn {
     padding: 6px 12px;

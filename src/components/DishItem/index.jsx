@@ -26,8 +26,6 @@ const DishItem = ({ dish }) => {
     setQuantity(prev => (prev > 0 ? prev - 1 : 0))
   }
 
-  const isVeg = dishType === 2 || dishType === 1 // Veg indicator check (standard dataset: 1 or 2)
-
   return (
     <CartContext.Consumer>
       {value => {
@@ -54,7 +52,7 @@ const DishItem = ({ dish }) => {
             </div>
 
             <div className="dish-details-container">
-              <h3 className="dish-title">{dishName}</h3>
+              <h1 className="dish-title">{dishName}</h1>
               <p className="dish-price">
                 {dishCurrency} {dishPrice}
               </p>
@@ -70,7 +68,7 @@ const DishItem = ({ dish }) => {
                     >
                       -
                     </button>
-                    <span className="quantity-count-text">{quantity}</span>
+                    <p className="quantity-count-text">{quantity}</p>
                     <button
                       type="button"
                       className="quantity-controller-btn"
