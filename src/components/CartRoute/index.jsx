@@ -54,7 +54,7 @@ const CartRoute = () => (
                 <div className="cart-summary-container">
                   <div className="summary-card">
                     <h1 className="order-total-heading">
-                      Order Total: <span className="order-total-value">{currency} {totalOrderPrice}/-</span>
+                      Order Total: {currency} {totalOrderPrice}
                     </h1>
                     <p className="summary-items-count">
                       {cartList.length} {cartList.length === 1 ? 'item' : 'items'} in cart
