@@ -1,0 +1,130 @@
+.cart-route-container {
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+.cart-content-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 24px;
+}
+
+.empty-cart-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-cart-image {
+  width: 280px;
+  max-width: 80%;
+  margin-bottom: 24px;
+}
+
+.empty-cart-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.cart-body-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.my-cart-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.remove-all-btn {
+  color: var(--danger-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s ease;
+}
+
+.remove-all-btn:hover {
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.cart-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.cart-summary-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.summary-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.summary-total-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.summary-total-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-left: 8px;
+}
+
+.summary-items-count {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.checkout-btn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+@media screen and (max-width: 600px) {
+  .cart-content-container {
+    padding: 0 16px;
+    margin: 20px auto;
+  }
+  .summary-card {
+    width: 100%;
+    min-width: unset;
+  }
+}
