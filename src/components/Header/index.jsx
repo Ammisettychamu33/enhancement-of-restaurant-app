@@ -1,15 +1,16 @@
-import { Link, useNavigate } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { FaShoppingCart } from 'react-icons/fa'
 import CartContext from '../../context/CartContext'
 import './index.css'
 
-const Header = ({ restaurantName = 'UNI Resto Cafe' }) => {
-  const navigate = useNavigate()
+const Header = props => {
+  const { restaurantName = 'UNI Resto Cafe' } = props
 
   const onClickLogout = () => {
+    const { history } = props
     Cookies.remove('jwt_token')
-    navigate('/login', { replace: true })
+    history.replace('/login')
   }
 
   return (
@@ -31,7 +32,10 @@ const Header = ({ restaurantName = 'UNI Resto Cafe' }) => {
                   type="button"
                   className="cart-icon-btn"
                   data-testid="cart"
-                  onClick={() => navigate('/cart')}
+                  onClick={() => {
+                    const { history } = props
+                    history.push('/cart')
+                  }}
                   aria-label="cart"
                 >
                   <FaShoppingCart className="cart-icon" />
@@ -53,4 +57,4 @@ const Header = ({ restaurantName = 'UNI Resto Cafe' }) => {
   )
 }
 
-export default Header
+export default withRouter(Header)

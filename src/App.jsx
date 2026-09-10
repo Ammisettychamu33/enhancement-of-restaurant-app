@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Component } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import CartContext from './context/CartContext'
 import LoginRoute from './components/LoginRoute'
 import HomeRoute from './components/HomeRoute'
@@ -8,89 +8,97 @@ import ProtectedRoute from './components/ProtectedRoute'
 import NotFound from './components/NotFound'
 import './App.css'
 
-const App = () => {
-  const [cartList, setCartList] = useState([])
-
-  const removeAllCartItems = () => {
-    setCartList([])
+class App extends Component {
+  state = {
+    cartList: [],
   }
 
-  const addCartItem = dish => {
-    setCartList(prevList => {
-      const existingItem = prevList.find(item => item.dishId === dish.dishId)
-      if (existingItem) {
-        return prevList.map(item => {
-          if (item.dishId === dish.dishId) {
-            return { ...item, quantity: item.quantity + dish.quantity }
+  removeAllCartItems = () => {
+    this.setState({ cartList: [] })
+  }
+
+  addCartItem = dish => {
+    const { cartList } = this.state
+    const dishObject = cartList.find(eachCartItem => eachCartItem.dishId === dish.dishId)
+
+    if (dishObject) {
+      this.setState(prevState => ({
+        cartList: prevState.cartList.map(eachCartItem => {
+          if (dishObject.dishId === eachCartItem.dishId) {
+            const updatedQuantity = eachCartItem.quantity + dish.quantity
+            return { ...eachCartItem, quantity: updatedQuantity }
           }
-          return item
-        })
-      }
-      return [...prevList, dish]
-    })
+          return eachCartItem
+        }),
+      }))
+    } else {
+      const updatedCartList = [...cartList, dish]
+      this.setState({ cartList: updatedCartList })
+    }
   }
 
-  const removeCartItem = dishId => {
-    setCartList(prevList => prevList.filter(item => item.dishId !== dishId))
+  removeCartItem = dishId => {
+    const { cartList } = this.state
+    const updatedCartList = cartList.filter(
+      eachCartItem => eachCartItem.dishId !== dishId
+    )
+    this.setState({ cartList: updatedCartList })
   }
 
-  const incrementCartItemQuantity = dishId => {
-    setCartList(prevList =>
-      prevList.map(item => {
-        if (item.dishId === dishId) {
-          return { ...item, quantity: item.quantity + 1 }
+  incrementCartItemQuantity = dishId => {
+    this.setState(prevState => ({
+      cartList: prevState.cartList.map(eachCartItem => {
+        if (dishId === eachCartItem.dishId) {
+          const updatedQuantity = eachCartItem.quantity + 1
+          return { ...eachCartItem, quantity: updatedQuantity }
         }
-        return item
-      })
-    )
+        return eachCartItem
+      }),
+    }))
   }
 
-  const decrementCartItemQuantity = dishId => {
-    setCartList(prevList =>
-      prevList
-        .map(item => {
-          if (item.dishId === dishId) {
-            return { ...item, quantity: item.quantity - 1 }
+  decrementCartItemQuantity = dishId => {
+    const { cartList } = this.state
+    const dishObject = cartList.find(eachCartItem => eachCartItem.dishId === dishId)
+    if (dishObject.quantity > 1) {
+      this.setState(prevState => ({
+        cartList: prevState.cartList.map(eachCartItem => {
+          if (dishId === eachCartItem.dishId) {
+            const updatedQuantity = eachCartItem.quantity - 1
+            return { ...eachCartItem, quantity: updatedQuantity }
           }
-          return item
-        })
-        .filter(item => item.quantity > 0)
-    )
+          return eachCartItem
+        }),
+      }))
+    } else {
+      this.removeCartItem(dishId)
+    }
   }
 
-  return (
-    <CartContext.Provider
-      value={{
-        cartList,
-        removeAllCartItems,
-        addCartItem,
-        removeCartItem,
-        incrementCartItemQuantity,
-        decrementCartItemQuantity,
-      }}
-    >
-      <Routes>
-        <Route path="/login" element={<LoginRoute />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <HomeRoute />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <CartRoute />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </CartContext.Provider>
-  )
+  render() {
+    const { cartList } = this.state
+
+    return (
+      <CartContext.Provider
+        value={{
+          cartList,
+          removeAllCartItems: this.removeAllCartItems,
+          addCartItem: this.addCartItem,
+          removeCartItem: this.removeCartItem,
+          incrementCartItemQuantity: this.incrementCartItemQuantity,
+          decrementCartItemQuantity: this.decrementCartItemQuantity,
+        }}
+      >
+        <Switch>
+          <Route exact path="/login" component={LoginRoute} />
+          <ProtectedRoute exact path="/" component={HomeRoute} />
+          <ProtectedRoute exact path="/cart" component={CartRoute} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
+        </Switch>
+      </CartContext.Provider>
+    )
+  }
 }
 
 export default App
