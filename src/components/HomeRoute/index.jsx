@@ -13,7 +13,7 @@ const HomeRoute = () => {
   }, [])
 
   const getRestaurantData = async () => {
-    const api = 'https://apis.ccbp.in/restaurant-static-dataset'
+    const api = 'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details'
     try {
       const response = await fetch(api)
       const data = await response.json()
