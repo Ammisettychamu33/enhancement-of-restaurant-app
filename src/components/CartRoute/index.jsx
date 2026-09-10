@@ -30,12 +30,12 @@ const CartRoute = () => (
                   alt="empty cart"
                   className="empty-cart-image"
                 />
-                <h2 className="empty-cart-heading">Your Cart Is Empty</h2>
+                <h1 className="empty-cart-heading">Your Cart Is Empty</h1>
               </div>
             ) : (
               <div className="cart-body-container">
                 <div className="cart-header-actions">
-                  <h2 className="my-cart-heading">My Cart</h2>
+                  <h1 className="my-cart-heading">My Cart</h1>
                   <button
                     type="button"
                     className="remove-all-btn"
@@ -53,12 +53,9 @@ const CartRoute = () => (
 
                 <div className="cart-summary-container">
                   <div className="summary-card">
-                    <h3 className="summary-total-label">
-                      Order Total:{' '}
-                      <span className="summary-total-value">
-                        {currency} {totalOrderPrice.toFixed(2)}
-                      </span>
-                    </h3>
+                    <h1 className="order-total-heading">
+                      Order Total: <span className="order-total-value">{currency} {totalOrderPrice}/-</span>
+                    </h1>
                     <p className="summary-items-count">
                       {cartList.length} {cartList.length === 1 ? 'item' : 'items'} in cart
                     </p>
