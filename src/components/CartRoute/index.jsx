@@ -17,7 +17,6 @@ const CartRoute = () => (
         (acc, item) => acc + item.dishPrice * item.quantity,
         0
       )
-      const currency = cartList.length > 0 ? cartList[0].dishCurrency : 'SAR'
 
       return (
         <div className="cart-route-container">
@@ -54,7 +53,7 @@ const CartRoute = () => (
                 <div className="cart-summary-container">
                   <div className="summary-card">
                     <h1 className="order-total-heading">
-                      Order Total: {currency} {totalOrderPrice}
+                      Order Total: {totalOrderPrice}/-
                     </h1>
                     <p className="summary-items-count">
                       {cartList.length} {cartList.length === 1 ? 'item' : 'items'} in cart
